@@ -1,5 +1,5 @@
 {
-  "name": "node-pwned",
+  "name": "pwned-api",
   "version": "0.0.1",
   "description": "A very simple javascript client for HaveIBeenPwned API.",
   "homepage": "",
@@ -58,7 +58,7 @@
     },
     "plugins": ["prettier"]
   },
-  "repository": "b4dnewz/node-pwned",
+  "repository": "b4dnewz/pwned-api",
   "jest": {
     "testEnvironment": "node"
   },

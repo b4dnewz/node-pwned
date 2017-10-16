@@ -1,17 +1,17 @@
-# node-pwned
+# pwned-api
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 > A very simple javascript client for HaveIBeenPwned API.
 
 ## Installation
 
 ```sh
-$ npm install --save node-pwned
+$ npm install --save pwned-api
 ```
 
 ## Usage
 
 ```js
-const Pwned = require('node-pwned');
+const Pwned = require('pwned-api');
 const pwner = new Pwned();
 
 pwner.breaches({}, (err, results) => {
@@ -26,8 +26,8 @@ For details in depth about the API please consult the [HaveIBeenPwned](https://h
 MIT © b4dnewz
 
 
-[npm-image]: https://badge.fury.io/js/node-pwned.svg
-[npm-url]: https://npmjs.org/package/node-pwned
+[npm-image]: https://badge.fury.io/js/pwned-api.svg
+[npm-url]: https://npmjs.org/package/pwned-api
 [travis-image]: https://travis-ci.org/b4dnewz/node-pwned.svg?branch=master
 [travis-url]: https://travis-ci.org/b4dnewz/node-pwned
 [daviddm-image]: https://david-dm.org/b4dnewz/node-pwned.svg?theme=shields.io

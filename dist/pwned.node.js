@@ -594,9 +594,9 @@ var defaults = {
   }
 };
 
-var NodePwned = function () {
-  function NodePwned(options) {
-    _classCallCheck(this, NodePwned);
+var _class = function () {
+  function _class(options) {
+    _classCallCheck(this, _class);
 
     this.options = Object.assign({}, defaults, options);
   }
@@ -604,7 +604,7 @@ var NodePwned = function () {
   // Run the API call
 
 
-  _createClass(NodePwned, [{
+  _createClass(_class, [{
     key: 'run',
     value: function run(_ref) {
       var _this = this;
@@ -618,8 +618,6 @@ var NodePwned = function () {
           callback = _ref$callback === undefined ? function () {} : _ref$callback;
 
       return new Promise(function (resolve, reject) {
-        var url = ENDPOINT + '/' + service + '/' + value + '?' + qs.stringify(params);
-        console.log('Calling url:', url);
         fetch(ENDPOINT + '/' + service + '/' + value + '?' + qs.stringify(params), _this.options).then(function (res) {
           return res.text().then(function (text) {
             return text ? JSON.parse(text) : {};
@@ -665,10 +663,10 @@ var NodePwned = function () {
     }
   }]);
 
-  return NodePwned;
+  return _class;
 }();
 
-exports.default = NodePwned;
+exports.default = _class;
 
 /***/ }),
 /* 11 */

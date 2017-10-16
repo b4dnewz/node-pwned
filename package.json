@@ -9,7 +9,7 @@
     "url": ""
   },
   "files": ["lib"],
-  "main": "lib/pwned.node.js",
+  "main": "dist/pwned.node.js",
   "keywords": [""],
   "devDependencies": {
     "babel-cli": "^6.26.0",

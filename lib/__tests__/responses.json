@@ -1,0 +1,81 @@
+{
+  "breach": {
+    "Name": "Adobe",
+    "Title": "Adobe",
+    "Domain": "adobe.com",
+    "BreachDate": "2013-10-04",
+    "AddedDate": "2013-12-04T00:00Z",
+    "ModifiedDate": "2013-12-04T00:00Z",
+    "PwnCount": 152445165,
+    "Description": "Some description",
+    "DataClasses": [
+      "Email addresses",
+      "Password hints",
+      "Passwords",
+      "Usernames"
+    ],
+    "IsVerified": true,
+    "IsSensitive": false,
+    "IsRetired": false,
+    "IsSpamList": false
+  },
+  "breaches": [
+    {
+      "Name": "Adobe",
+      "Title": "Adobe",
+      "Domain": "adobe.com",
+      "BreachDate": "2013-10-04",
+      "AddedDate": "2013-12-04T00:00Z",
+      "ModifiedDate": "2013-12-04T00:00Z",
+      "PwnCount": 152445165,
+      "Description": "Some description",
+      "DataClasses": [
+        "Email addresses",
+        "Password hints",
+        "Passwords",
+        "Usernames"
+      ],
+      "IsVerified": true,
+      "IsSensitive": false,
+      "IsRetired": false,
+      "IsSpamList": false
+    }
+  ],
+  "dataclasses": [
+    "Account balances",
+    "Age groups",
+    "Ages",
+    "Astrological signs",
+    "Auth tokens",
+    "Avatars",
+    "Bank account numbers",
+    "Banking PINs",
+    "Beauty ratings",
+    "SMS messages",
+    "Social connections",
+    "Spoken languages",
+    "Support tickets",
+    "Survey results",
+    "Time zones",
+    "Travel habits",
+    "User statuses",
+    "User website URLs",
+    "Usernames",
+    "Utility bills"
+  ],
+  "pasteaccount": [
+    {
+      "Source": "Pastebin",
+      "Id": "8Q0BvKD8",
+      "Title": "syslog",
+      "Date": "2014-03-04T19:14:54Z",
+      "EmailCount": 139
+    },
+    {
+      "Source": "Pastie",
+      "Id": "7152479",
+      "Date": "2013-03-28T16:51:10Z",
+      "EmailCount": 30
+    }
+  ]
+}

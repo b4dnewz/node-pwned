@@ -1,16 +1,16 @@
 {
   "name": "pwned-api",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A very simple javascript client for HaveIBeenPwned API.",
-  "homepage": "",
+  "homepage": "https://github.com/b4dnewz/node-pwned",
   "author": {
     "name": "b4dnewz",
     "email": "filippo@codekraft.it",
-    "url": ""
+    "url": "https://b4dnewz.github.io/"
   },
   "files": ["lib"],
   "main": "dist/pwned.node.js",
-  "keywords": [""],
+  "keywords": ["haveibeenpwned", "javascript-client"],
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
@@ -58,7 +58,7 @@
     },
     "plugins": ["prettier"]
   },
-  "repository": "b4dnewz/pwned-api",
+  "repository": "b4dnewz/node-pwned",
   "jest": {
     "testEnvironment": "node"
   },

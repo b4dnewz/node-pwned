@@ -1,15 +1,27 @@
 # pwned-api
+
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> A very simple javascript client for HaveIBeenPwned API.
+
+> Unofficial javascript client for HaveIBeenPwned API
 
 ## Installation
 
-```sh
-$ npm install --save pwned-api
+You can use it as a nodejs module:
+
+```
+npm install --save pwned-api
+```
+
+Or also install it globally and use it as cli tool:
+
+```
+npm install --global pwned-api
 ```
 
 ## Usage
-Load the __pwned-api__ module into your script than init the class to use its methods.
+
+Load the __pwned-api__ module into your script than init the class to use its methods. It accept a callback but also return a promise so you can use it also with async.
+
 ```js
 const Pwned = require('pwned-api');
 const pwner = new Pwned();
@@ -19,10 +31,37 @@ pwner.breaches({}, (err, results) => {
 });
 ```
 
+Using new __await/async__ functionalities:
+
+```js
+import Pwned from 'pwned-api'
+const pwner = new Pwned();
+
+(async () => {
+  const res = await pwner.breaches();
+  // Do whatever you need to do
+})()
+```
+
+The pwner constructor takes two arguments, so you can customize the requests beheviour:
+
+```js
+const pwner = new Pwned({
+  timeout: 2500,
+  headers: {
+    'User-Agent': 'My App'
+  }
+});
+```
+
+---
+
 ## Methods
 
 #### breaches
+
 List all the available breaches
+
 ```js
 pwner.breaches({}, (err, results) => {
   console.log('Results:', results);
@@ -30,7 +69,9 @@ pwner.breaches({}, (err, results) => {
 ```
 
 #### breachedAccount
+
 Return a list of all breaches a particular account has been involved in.
+
 ```js
 pwner.breachedAccount('john.doe@example.com', {}, (err, results) => {
   console.log('Results:', results);
@@ -38,7 +79,9 @@ pwner.breachedAccount('john.doe@example.com', {}, (err, results) => {
 ```
 
 #### breach
+
 Return single breach retrieved by the breach "name".
+
 ```js
 pwner.breach('AshleyMadison', (err, results) => {
   console.log('Results:', results);
@@ -46,7 +89,9 @@ pwner.breach('AshleyMadison', (err, results) => {
 ```
 
 #### dataClasses
+
 Return all the data classes in the system.
+
 ```js
 pwner.dataClasses((err, results) => {
   console.log('Results:', results);
@@ -54,7 +99,9 @@ pwner.dataClasses((err, results) => {
 ```
 
 #### pasteAccount
+
 Return all pastes for an account, takes a single parameter which is the email address to be searched for.
+
 ```js
 pwner.pasteAccount('john.doe@example.com', (err, results) => {
   console.log('Results:', results);
@@ -62,7 +109,9 @@ pwner.pasteAccount('john.doe@example.com', (err, results) => {
 ```
 
 #### pwnedPassword
+
 Check if a password been exposed in data breaches and exists on HIBP database.
+
 ```js
 pwner.pwnedPassword('admin1234', {}, (err) => {
   console.log('Error;', err );
@@ -70,6 +119,8 @@ pwner.pwnedPassword('admin1234', {}, (err) => {
 ```
 
 For details in depth about the API please consult the official [HaveIBeenPwned](https://haveibeenpwned.com/API/v2) page.
+
+---
 
 ## License
 

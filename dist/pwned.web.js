@@ -86,6 +86,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var qs = __webpack_require__(1);
@@ -94,38 +96,129 @@ var ENDPOINT = 'https://haveibeenpwned.com/api/v2';
 
 var defaults = {
   method: 'GET',
+  // A custom user agent must be provided
+  // @see https://haveibeenpwned.com/API/v2#UserAgent
   headers: {
-    Accept: 'application/json'
+    Accept: 'application/json',
+    'User-Agent': 'Node-Pwner'
   }
 };
 
-var _class = function () {
-  function _class(options) {
-    _classCallCheck(this, _class);
+var doError = function doError(res) {
+  var body = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
-    this.options = Object.assign({}, defaults, options);
+  var err = new Error('API Error');
+  err.statusCode = res.status;
+  err.statusText = res.statusText;
+  err.body = body;
+  return err;
+};
+
+var prepareParams = function prepareParams(obj) {
+  Object.keys(obj).forEach(function (key) {
+    return obj[key] === undefined && delete obj[key];
+  });
+  return qs.stringify(obj);
+};
+
+var assignDefined = function assignDefined(target) {
+  for (var _len = arguments.length, sources = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    sources[_key - 1] = arguments[_key];
   }
 
-  _createClass(_class, [{
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = sources[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var source = _step.value;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
+
+      try {
+        for (var _iterator2 = Object.keys(source)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var key = _step2.value;
+
+          var val = source[key];
+          if (val !== undefined) {
+            if (_typeof(target[key]) === 'object') {
+              assignDefined(target[key], val);
+            } else {
+              target[key] = val;
+            }
+          }
+        }
+      } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+            _iterator2.return();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
+      }
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  return target;
+};
+
+var Pwner = function () {
+  function Pwner() {
+    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        timeout = _ref.timeout,
+        agent = _ref.agent,
+        headers = _ref.headers;
+
+    _classCallCheck(this, Pwner);
+
+    this.options = assignDefined({}, defaults, {
+      timeout: timeout,
+      headers: agent ? { 'User-Agent': agent } : headers
+    });
+  }
+
+  _createClass(Pwner, [{
     key: 'run',
-    value: function run(_ref) {
+    value: function run(_ref2) {
       var _this = this;
 
-      var service = _ref.service,
-          _ref$value = _ref.value,
-          value = _ref$value === undefined ? '' : _ref$value,
-          _ref$params = _ref.params,
-          params = _ref$params === undefined ? {} : _ref$params,
-          _ref$callback = _ref.callback,
-          callback = _ref$callback === undefined ? function () {} : _ref$callback;
+      var service = _ref2.service,
+          _ref2$value = _ref2.value,
+          value = _ref2$value === undefined ? '' : _ref2$value,
+          _ref2$params = _ref2.params,
+          params = _ref2$params === undefined ? {} : _ref2$params,
+          _ref2$callback = _ref2.callback,
+          callback = _ref2$callback === undefined ? function () {} : _ref2$callback;
 
-      Object.keys(params).forEach(function (key) {
-        return params[key] === undefined && delete params[key];
-      });
       return new Promise(function (resolve, reject) {
-        fetch(ENDPOINT + '/' + service + '/' + value + '?' + qs.stringify(params), _this.options).then(function (res) {
+        var query = prepareParams(params);
+        fetch(ENDPOINT + '/' + service + '/' + value + '?' + query, _this.options).then(function (res) {
           return res.text().then(function (text) {
-            return text ? JSON.parse(text) : {};
+            if (res.status !== 200) {
+              throw doError(res, text);
+            }
+            return text === '' ? text : JSON.parse(text);
           });
         }).then(function (body) {
           callback(null, body);
@@ -168,10 +261,10 @@ var _class = function () {
     }
   }]);
 
-  return _class;
+  return Pwner;
 }();
 
-exports.default = _class;
+exports.default = Pwner;
 
 /***/ }),
 /* 1 */

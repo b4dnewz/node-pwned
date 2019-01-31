@@ -1,15 +1,17 @@
 {
   "name": "pwned-api",
   "version": "0.0.5",
-  "description": "A very simple javascript client for HaveIBeenPwned API.",
+  "description": "Unofficial javascript client for HaveIBeenPwned API",
   "homepage": "https://github.com/b4dnewz/node-pwned",
   "author": {
     "name": "b4dnewz",
     "email": "filippo@codekraft.it",
     "url": "https://b4dnewz.github.io/"
   },
+  "license": "MIT",
   "files": [
-    "lib"
+    "lib",
+    "dist"
   ],
   "main": "dist/pwned.node.js",
   "bin": {
@@ -19,6 +21,18 @@
     "haveibeenpwned",
     "javascript-client"
   ],
+  "scripts": {
+    "pretest": "eslint . --fix",
+    "precommit": "lint-staged",
+    "test": "jest --coverage",
+    "prebuild": "npm run test",
+    "build": "webpack",
+    "dev": "webpack -w"
+  },
+  "dependencies": {
+    "commander": "^2.15.1",
+    "node-fetch": "^2.1.2"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
@@ -36,12 +50,6 @@
     "prettier": "^1.15.3",
     "webpack": "^3.2",
     "webpack-cli": "^3.2.1"
-  },
-  "scripts": {
-    "pretest": "eslint .",
-    "precommit": "lint-staged",
-    "test": "jest --coverage",
-    "build": "webpack"
   },
   "lint-staged": {
     "*.js": [
@@ -78,10 +86,5 @@
   "repository": "b4dnewz/node-pwned",
   "jest": {
     "testEnvironment": "node"
-  },
-  "license": "MIT",
-  "dependencies": {
-    "commander": "^2.15.1",
-    "node-fetch": "^2.1.2"
   }
 }
